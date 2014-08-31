@@ -1,0 +1,206 @@
+\documentclass[12pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\author{Bruno Sampaio Pinho da Silva}
+\title{C de Estudante para Estudante}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Estuturas de Contole}
+Neste capítulo, vamos abordar as estruturas de controle. Bem, tais estruturas são responsáveis em decidir o fluxo de execução do programa. Por exemplo, suponha que você possua apenas R\$30,00 para comprar comida no mercado, mas você não sabe o preço exato de cada produto. A sua lista é composta de carne, arroz e feijão. Você precisa garantir que a carne seja comprada, \emph{\textbf{se}} sobrar dinheiro, você compra os outros produtos.
+
+Esse tipo de estrutura é bem comum em nosso dia a dia. Agora vamos introduzir formalmente como que criamos isso usando a linguagem C.
+
+\section{Comando If}
+O comando \textit{if}, como o próprio nome sugere, é responsável em tomar uma decisão caso alguma condição seja satisfeita. Logo abaixo existe a sintaxe desse comando:
+
+
+\begin{lstlisting}[label=comandoIf,caption=Comando if]
+// comando if
+if ( <condicao> ) {
+  <comandos>;
+}
+\end{lstlisting}
+
+Na linguagem C, qualquer expressão que pode ser avaliada como valor verdadeiro ou falso pode ser inserida na seção de <condicao>. Aqui aplicam-se também todos os operadores relacionais da linguagem como $<, >, <=, !, ||,  \&\&$, etc.
+Vamos agora ``trazudir'' a ação de ir ao mercado e comprar os produtos para programação.
+
+
+\begin{lstlisting}[label=comandoIf,caption=Comando if]
+#include <stdio.h>
+
+#define PRECO_CARNE  15.50
+#define PRECO_ARROZ  4.00
+#define PRECO_FEIJAO 4.50
+
+int main () {
+  float dinheiro = 30.00;
+  
+  if (PRECO_CARNE < dinheiro)
+    dinheiro -= PRECO_CARNE;
+  
+  if (PRECO_ARROZ < dinheiro)
+    dinheiro -= PRECO_ARROZ;
+  
+  if (PRECO_FEIJAO < dinheiro)
+  dinheiro -= PRECO_FEIJAO;    
+  
+  return 0;
+}
+\end{lstlisting}
+
+Observe que a compra, caracterizada pela subtração do valor do produto, só é efetuada se a condição for satisfeita, que no caso é ter dinheiro suficiente para comprar o produto.
+Há somente um comando dentro do if, porém, se quisermos executar uma lista deles, basta inserir um par de chaves \{ \} e colocar todos os comandos dentro. Isso é o chamada ``bloco'' de execução que agrega um conjunto de operações a serem realizadas. Geralmente usado quando temos mais do que uma instrução a ser executada em comandos de controle.
+
+\begin{lstlisting}[label=comandoIf,caption=Exemplo múltiplos comandos]
+if ( <condicao> ) {
+  <comando1>;
+  <comando2>;
+  <comando3>;
+  .
+  .
+  .
+  <comandoN>;
+}
+\end{lstlisting}
+
+\textbf{Exemplo}:
+  Faça um programa que some dois valores e imprima o resultado se eles forem positivos.
+
+\begin{lstlisting}[label=comandoIf,caption=Exemplo múltiplos comandos]
+#include <stdio.h>
+
+int main () {
+  int a, b, soma;
+  scanf("%d", &a);  
+  scanf("%d", &b);
+  
+  if ( a > 0 && b > 0) {
+    soma = a + b;
+    printf ("%d\n", soma);
+  }
+  
+  return 0;
+}
+\end{lstlisting}
+
+\section{Else}
+Até agora só poderíamos executar uma tarefa caso a condição fosse verdadeira, mas e no caso dela ser falsa? Existe o complemento do comando \textit{if} que é o \textit{else}. Else significa ``caso contrário'' e é utilizado para definir ações a serem tomadas quando a condição testada for falsa.
+Por exemplo, suponha que queiramos tomar decisões em ambos casos, quando a condição for verdadeira e quando for falsa. Se num sistema de inscrição, por exemplo, alguém for fazer uma inscrição e houver vagas disponíveis, o sistema irá redirecionar a tela para o preenchimento de formulário, caso contrário, exibirá uma mensagem de alerta. Isso é a aplicação do comando \textit{if-else} para testar condições.
+
+\begin{lstlisting}[label=comandoIf,caption=Exemplo com else]
+if ( <numero_vagas_maior_que_zero> ) {
+  <redireciona_pagina>;
+  <exibe_formulario>;
+}
+else {
+  <exibe_mensagem>;
+  <aborta_inscricao>;
+}
+\end{lstlisting}
+
+\newpage
+\section{Exercícios}
+
+\begin{enumerate}
+  \item Elabore um programa que decida qual o maior de dois números inteiros e imprima na saída padrão a seguinte     
+  frase: ``O maior número é: <valor>.'' Em que <valor> deve ser o maior número da entrada. Os dados de entrada são separados por espaço em branco.\\
+  \\Exemplo de entrada: 12 56
+  \\Exemplo de saída: O maior número é: 56.
+  
+  
+  \item Considerando que as dimensões de uma academia são fornecidas pela entrada padrão, construa um programa que        
+  decida se ela vai caber dentro da área de 400m$^{2}$ reservada para a construção de um espaço recreativo no       
+  centro da sua cidade. Imprima na saída apenas uma string contendo Sim ou Não. (Não esqueça de imprimir caracter de nova linha);\\
+  \\ Exemplo de entrada: \\10.45 18.98
+  
+  \item Considere o seguinte intervalo: $[0, 170)$. Dado um número inteiro qualquer, imprima uma mensagem 
+  indicando se ele pertence ou não ao intervalo dado.
+  
+  \item Conversão entre números inteiros é muito comum, usando base decimal ou binária. Sua amiga está aprendendo sobre eletrônica digital e ela está tendo dificuldades para converter de binário para decimal. Sua tarefa é fazer um programa para ajudá-la a conferir os resultados dela. Para isso, dada uma entrada consistindo de números com suas representações decimal e binária, construa um programa que imprima a mensagem na tela informando se a conversão está ``certa'' ou ``errada''. Os números são separados por espaço em branco e cada sequência de dois é separada por uma nova linha. Cada número binário possui 4 dígitos. Os casos de teste terminam quando um 0 é encontrado.\\
+  
+  
+    \begin{minipage}{.45\textwidth}
+      \centering
+
+Exemplo de entrada: 
+
+  1 0001
+  
+  2 0010
+  
+  3 0011
+  
+  4 1111  
+  
+  0
+    \end{minipage}
+    \begin{minipage}{.45\textwidth}
+      \centering
+Exemplo de saída:
+
+  certo
+  
+  certo
+  
+  certo
+  
+  errado
+    \end{minipage}
+
+  \item Dado um número inteiro qualquer, faça um programa que verifica se ele é par ou ímpar. Imprima na saída padrão uma mensagem informando o resultado.
+  
+  \item Suponha que um carro está se movendo com uma velocidade de 90km/h na BR-324 sentido Salvador e ele ainda tem 197km para chegar à capital. Admita que ele mantenha essa velocidade constante em todo o trecho, faça um programa que calcule e verifique se ele chegará no seu destino em no máximo nas próximas 3 horas. Em caso afirmativo, imprima uma mensagem na tela informando ``É possível!'', caso contrário, ``Não é possível.'';
+  
+  \item Seu amigo está querendo fazer uma calculadora de operações lógicas e pediu sua ajuda. A calculadora possui duas operações que são: \emph{xor} (ou exclusivo) e \emph{and}. Para poder usar tal operação é necessário fazer a leitura de um caracter. O 'x' indica uma operação xor e um 'n' uma operação and. Desenvolva um programa que faça a leitura dessa caracter e imprima na tela o resultado da operação desejada entre os números 1 e 2, depois entre 2 e 3, e, por fim, entre 3 e 4. (Observação: converta os números para base binária e verifique o resultado obtido).
+  
+  \item Um palíndromo pode ser compreendido como uma sequência de caracteres ou números que podem ser lidos tanto da esquerda para a direita quanto da direita para a esquerda sem alterar o resultado, é como se ele fosse espelhado. Por exemplo: 121 é um palíndromo. Construa um programa que verifica se um número de 3 dígitos forma um palíndromo. Imprima na saída padrão o resultado ``sim'' ou ``não''.
+
+  \item Dada uma sequência de ângulos em graus, verifique quais deles são agudos e quais são obtusos. A lista possui 10 número e são separados por caracter de nova linha. Para cada valor, imprima na tela a string informando ``agudo'' ou ``obtuso'' para o respectivo valor lido.
+  
+\end{enumerate}
+
+\end{document}
+
+
+
+ 
+
