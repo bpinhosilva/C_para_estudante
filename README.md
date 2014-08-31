@@ -1,4 +1,4 @@
-C_para_estudante
+C de Estudante para Estudante
 ================
 
 Esse é o projeto de um livro open-source da linguagem C. 
