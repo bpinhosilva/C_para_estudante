@@ -1,10 +1,13 @@
-\documentclass[12pt,a4paper]{book}
+\documentclass[12pt, a4paper]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[portuguese]{babel}
 
-\usepackage{lmodern}
-\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+% Eu particularmente prefiro a Computer Modern
+% que é a fonte padrão. Se achares melhor a 
+% outra, diz aí que a gente vê.
 
+%\usepackage{lmodern}
+%\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
@@ -13,8 +16,9 @@
 \usepackage{graphicx}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 
-\author{Bruno Sampaio Pinho da Silva}
-\title{C de Estudante para Estudante}
+\author{Bruno Sampaio Pinho da Silva\\[0.2cm]Thiago Oliveira Ribeiro}
+\title{\bf{C de Estudante para Estudante}}
+\date{Agosto de 2014}
 
 \usepackage{listings}
 \usepackage{color}
@@ -41,15 +45,16 @@
 }
 
 \begin{document}
-\maketitle
-\tableofcontents
-
-
-\input{chapters/condition.tex}
-
-
-\input{chapters/loops.tex}
-
+	%---------------------
+	% Capa e Sumário 
+	%---------------------
+	\maketitle
+	\tableofcontents
+	%---------------------
+	% Capítulos 
+	%---------------------
+	\input{chapters/condition.tex}
+	\input{chapters/loops.tex}
 \end{document}
 
 
